@@ -4,22 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SolverPro Graphing Calculator</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 0;
       background-color: #f4f4f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
     h1 {
       color: #333;
       margin-bottom: 20px;
-      text-align: center;
     }
     #calculator {
-      width: 100%;
-      height: 500px;
+      width: 80%;
+      height: 600px;
       border: 2px solid #ccc;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -28,7 +31,6 @@
       margin-top: 20px;
       display: flex;
       gap: 10px;
-      justify-content: center;
     }
     .controls button {
       padding: 10px 20px;
@@ -43,35 +45,6 @@
     .controls button:hover {
       background-color: #0056b3;
     }
-    .solver {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .solver input {
-      padding: 10px;
-      font-size: 16px;
-      width: 300px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .solver button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      background-color: #28a745;
-      color: white;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .solver button:hover {
-      background-color: #218838;
-    }
-    .solution {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #333;
-    }
   </style>
 </head>
 <body>
@@ -82,16 +55,9 @@
     <button onclick="zoomIn()">Zoom In</button>
     <button onclick="zoomOut()">Zoom Out</button>
   </div>
-  <div class="solver">
-    <input type="text" id="equationInput" placeholder="Enter an equation (e.g., 2x + 5 = 15)">
-    <button onclick="solveEquation()">Solve</button>
-    <div class="solution" id="solution"></div>
-  </div>
 
   <!-- Include Desmos API -->
   <script src="https://www.desmos.com/api/v1.10/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
-  <!-- Include math.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.7.0/math.min.js"></script>
   <script>
     // Initialize the calculator
     const elt = document.getElementById('calculator');
@@ -135,17 +101,6 @@
       };
       calculator.setMathBounds(newBounds);
     }
-
-    // Function to solve equations
-    function solveEquation() {
-      const equation = document.getElementById('equationInput').value;
-      try {
-        const solution = math.solve(equation);
-        document.getElementById('solution').innerText = `Solution: ${solution}`;
-      } catch (error) {
-        document.getElementById('solution').innerText = 'Error: Invalid equation';
-      }
-    }
   </script>
 </body>
-</html>
+</html> how can we improve it further to make it even more useful. can we i corporate a math solver too
