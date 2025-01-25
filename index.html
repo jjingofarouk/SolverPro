@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolverPro Graphing Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    #calculator {
+      width: 80%;
+      height: 600px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    .controls button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .controls button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>SolverPro Graphing Calculator</h1>
+  <div id="calculator"></div>
+  <div class="controls">
+    <button onclick="resetCalculator()">Reset</button>
+    <button onclick="zoomIn()">Zoom In</button>
+    <button onclick="zoomOut()">Zoom Out</button>
+  </div>
+
+  <!-- Include Desmos API -->
+  <script src="https://www.desmos.com/api/v1.10/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+  <script>
+    // Initialize the calculator
+    const elt = document.getElementById('calculator');
+    const calculator = Desmos.GraphingCalculator(elt, {
+      keypad: true,
+      expressions: true,
+      settingsMenu: true,
+      zoomButtons: false,
+      expressionsCollapsed: false,
+    });
+
+    // Example: Add a default expression
+    calculator.setExpression({ id: 'parabola', latex: 'y=x^2', color: Desmos.Colors.BLUE });
+
+    // Function to reset the calculator
+    function resetCalculator() {
+      calculator.setBlank();
+      calculator.setExpression({ id: 'parabola', latex: 'y=x^2', color: Desmos.Colors.BLUE });
+    }
+
+    // Function to zoom in
+    function zoomIn() {
+      const mathBounds = calculator.getMathBounds();
+      const newBounds = {
+        left: mathBounds.left * 0.8,
+        right: mathBounds.right * 0.8,
+        bottom: mathBounds.bottom * 0.8,
+        top: mathBounds.top * 0.8,
+      };
+      calculator.setMathBounds(newBounds);
+    }
+
+    // Function to zoom out
+    function zoomOut() {
+      const mathBounds = calculator.getMathBounds();
+      const newBounds = {
+        left: mathBounds.left * 1.2,
+        right: mathBounds.right * 1.2,
+        bottom: mathBounds.bottom * 1.2,
+        top: mathBounds.top * 1.2,
+      };
+      calculator.setMathBounds(newBounds);
+    }
+  </script>
+</body>
+</html>
