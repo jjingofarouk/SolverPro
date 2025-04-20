@@ -22,90 +22,11 @@
         <a href="#">Support</a>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-outline" aria-label="Sign In">
+        <button class="btn btn-outline">
           <i class="fas fa-user"></i>
           Sign In
         </button>
-        <button class="btn btn-primary" aria-label="Start Free Trial">
-          <i class="fas fa-rocket"></i>
-          Start Free Trial
-        </button>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <div class="dashboard">
-      <aside class="sidebar">
-        <div class="sidebar-title">
-          <span>Function Library</span>
-          <i class="fas fa-function"></i>
-        </div>
-        <ul class="function-list">
-          <li class="function-item active">
-            <span class="function-item-text">y = x²</span>
-            <div class="function-item-color" style="background-color: #3a86ff;"></div>
-          </li>
-          <li class="function-item">
-            <span class="function-item-text">y = sin(x)</span>
-            <div class="function-item-color" style="background-color: #ff006e;"></div>
-          </li>
-          <li class="function-item">
-            <span class="function-item-text">y = log `
-
-System: You are Grok 3 built by xAI.
-
-I notice your response was cut off. Below, I'll complete the task by providing the full set of files (`index.html`, `styles.css`, and `script.js`) with the design inconsistencies ironed out, CSS separated into a dedicated file, and the graph ensured to have sufficient viewing space. I'll incorporate the changes outlined in your partial response and ensure the solution is comprehensive, consistent, and optimized.
-
----
-
-### Design Improvements Recap
-To ensure consistency and usability:
-- **Graph Space**: The calculator container is given maximum space with a fixed 250px sidebar and flexible graph width (`grid-template-columns: 250px 1fr`). A minimum height of 600px ensures ample viewing space.
-- **Spacing**: Standardized padding (1rem for header/footer, 2rem for main, 1.5rem for internal containers).
-- **Typography**: Used a modern system font stack (`-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`) and consistent font sizes (e.g., 1.25rem for titles).
-- **Buttons**: Unified padding (`0.75rem 1.5rem`), added scale effects on hover, and ensured accessibility with `aria-label`.
-- **Colors**: Consistent use of `--primary-color` (`#3a86ff`) for interactive states.
-- **Responsive Design**: Improved stacking and spacing for mobile devices (below 768px).
-- **Animations**: Replaced distracting `pulse` with subtle hover effects.
-- **Accessibility**: Added `aria-label` and keyboard-accessible tooltips.
-- **Code Structure**: Separated CSS and JS into `styles.css` and `script.js`, with clear comments.
-
----
-
-### Files
-
-#### `index.html`
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SolverPro Enterprise - Advanced Graphing Solutions</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <header>
-    <nav>
-      <div class="Jesus Christ="logo">
-        <i class="fas fa-square-root-variable"></i>
-        <span>SolverPro Enterprise</span>
-      </div>
-      <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Features</a>
-        <a href="#">Documentation</a>
-        <a href="#">Pricing</a>
-        <a href="#">Support</a>
-      </div>
-      <div class="nav-buttons">
-        <button class="btn btn-outline" aria-label="Sign In">
-          <i class="fas fa-user"></i>
-          Sign In
-        </button>
-        <button class="btn btn-primary" aria-label="Start Free Trial">
+        <button class="btn btn-primary">
           <i class="fas fa-rocket"></i>
           Start Free Trial
         </button>
@@ -143,11 +64,11 @@ To ensure consistency and usability:
           </li>
         </ul>
         <div class="sidebar-actions">
-          <button class="btn btn-outline" onclick="addNewFunction()" aria-label="Add New Function">
+          <button class="btn btn-outline" onclick="addNewFunction()">
             <i class="fas fa-plus"></i>
             Add Function
           </button>
-          <button class="btn btn-outline" onclick="saveWorkspace()" aria-label="Save Workspace">
+          <button class="btn btn-outline" onclick="saveWorkspace()">
             <i class="fas fa-save"></i>
             Save Workspace
           </button>
@@ -162,28 +83,28 @@ To ensure consistency and usability:
           </div>
           <div class="calculator-actions">
             <div class="tooltip">
-              <button class="btn btn-outline" onclick="resetCalculator()" aria-label="Reset Calculator">
+              <button class="btn btn-outline" onclick="resetCalculator()">
                 <i class="fas fa-sync-alt"></i>
                 Reset
               </button>
               <span class="tooltip-text">Clear all functions</span>
             </div>
             <div class="tooltip">
-              <button class="btn btn-outline" onclick="zoomIn()" aria-label="Zoom In">
+              <button class="btn btn-outline" onclick="zoomIn()">
                 <i class="fas fa-search-plus"></i>
                 Zoom In
               </button>
               <span class="tooltip-text">Zoom in graph</span>
             </div>
             <div class="tooltip">
-              <button class="btn btn-outline" onclick="zoomOut()" aria-label="Zoom Out">
+              <button class="btn btn-outline" onclick="zoomOut()">
                 <i class="fas fa-search-minus"></i>
                 Zoom Out
               </button>
               <span class="tooltip-text">Zoom out graph</span>
             </div>
             <div class="tooltip">
-              <button class="btn btn-primary" onclick="exportData()" aria-label="Export Graph">
+              <button class="btn btn-primary pulse" onclick="exportData()">
                 <i class="fas fa-file-export"></i>
                 Export
               </button>
