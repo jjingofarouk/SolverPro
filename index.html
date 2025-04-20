@@ -3,58 +3,517 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SolverPro Graphing Calculator</title>
+  <title>SolverPro Enterprise - Advanced Graphing Solutions</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    :root {
+      --primary-color: #3a86ff;
+      --secondary-color: #0056b3;
+      --accent-color: #4cc9f0;
+      --light-bg: #f8f9fa;
+      --dark-bg: #212529;
+      --text-primary: #343a40;
+      --text-secondary: #6c757d;
+      --success: #38b000;
+      --warning: #ffbe0b;
+      --danger: #ff006e;
+      --border-radius: 8px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
       margin: 0;
       padding: 0;
-      background-color: #f4f4f9;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    
+    body {
+      background-color: var(--light-bg);
+      color: var(--text-primary);
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    /* Header Styles */
+    header {
+      background-color: white;
+      box-shadow: var(--shadow);
+      padding: 0.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    
+    .logo i {
+      margin-right: 10px;
+      font-size: 1.8rem;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 0.5rem 0;
+      position: relative;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: var(--transition);
+    }
+    
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--border-radius);
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      gap: 0.5rem;
     }
-    h1 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-    #calculator {
-      width: 80%;
-      height: 600px;
-      border: 2px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .controls {
-      margin-top: 20px;
-      display: flex;
-      gap: 10px;
-    }
-    .controls button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      background-color: #007bff;
+    
+    .btn-primary {
+      background: var(--primary-color);
       color: white;
-      cursor: pointer;
-      transition: background-color 0.3s;
     }
-    .controls button:hover {
-      background-color: #0056b3;
+    
+    .btn-primary:hover {
+      background: var(--secondary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(58, 134, 255, 0.2);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+    }
+    
+    .btn-outline:hover {
+      background: rgba(58, 134, 255, 0.08);
+    }
+    
+    /* Main Content */
+    main {
+      flex: 1;
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 2rem;
+      height: calc(100vh - 230px);
+      min-height: 600px;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .sidebar-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .sidebar-title i {
+      color: var(--accent-color);
+    }
+    
+    .function-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+    
+    .function-item {
+      padding: 0.8rem;
+      background: var(--light-bg);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .function-item:hover {
+      background: rgba(58, 134, 255, 0.08);
+    }
+    
+    .function-item.active {
+      background: rgba(58, 134, 255, 0.15);
+      border-left: 3px solid var(--primary-color);
+    }
+    
+    .function-item-text {
+      font-family: 'Consolas', monospace;
+      color: var(--text-primary);
+    }
+    
+    .function-item-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+    
+    .sidebar-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    
+    /* Calculator Container */
+    .calculator-container {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .calculator-header {
+      padding: 1.2rem;
+      background: white;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .calculator-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .calculator-title i {
+      color: var(--accent-color);
+    }
+    
+    .calculator-actions {
+      display: flex;
+      gap: 0.8rem;
+    }
+    
+    #calculator {
+      flex: 1;
+      width: 100%;
+      border: none;
+    }
+    
+    /* Footer */
+    footer {
+      background: white;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary-color);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+      }
+      
+      .sidebar {
+        max-height: 300px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .calculator-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      
+      .calculator-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+    
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    .tooltip-text {
+      visibility: hidden;
+      width: 120px;
+      background-color: var(--dark-bg);
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -60px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.8rem;
+    }
+    
+    .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: var(--dark-bg) transparent transparent transparent;
+    }
+    
+    /* Pulse Animation */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(58, 134, 255, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(58, 134, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(58, 134, 255, 0); }
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
     }
   </style>
 </head>
 <body>
-  <h1>SolverPro Graphing Calculator</h1>
-  <div id="calculator"></div>
-  <div class="controls">
-    <button onclick="resetCalculator()">Reset</button>
-    <button onclick="zoomIn()">Zoom In</button>
-    <button onclick="zoomOut()">Zoom Out</button>
-  </div>
+  <header>
+    <nav>
+      <div class="logo">
+        <i class="fas fa-square-root-variable"></i>
+        <span>SolverPro Enterprise</span>
+      </div>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Features</a>
+        <a href="#">Documentation</a>
+        <a href="#">Pricing</a>
+        <a href="#">Support</a>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn btn-outline">
+          <i class="fas fa-user"></i>
+          Sign In
+        </button>
+        <button class="btn btn-primary">
+          <i class="fas fa-rocket"></i>
+          Start Free Trial
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="dashboard">
+      <aside class="sidebar">
+        <div class="sidebar-title">
+          <span>Function Library</span>
+          <i class="fas fa-function"></i>
+        </div>
+        <ul class="function-list">
+          <li class="function-item active">
+            <span class="function-item-text">y = x²</span>
+            <div class="function-item-color" style="background-color: #3a86ff;"></div>
+          </li>
+          <li class="function-item">
+            <span class="function-item-text">y = sin(x)</span>
+            <div class="function-item-color" style="background-color: #ff006e;"></div>
+          </li>
+          <li class="function-item">
+            <span class="function-item-text">y = log(x)</span>
+            <div class="function-item-color" style="background-color: #38b000;"></div>
+          </li>
+          <li class="function-item">
+            <span class="function-item-text">y = √x</span>
+            <div class="function-item-color" style="background-color: #ffbe0b;"></div>
+          </li>
+          <li class="function-item">
+            <span class="function-item-text">y = |x|</span>
+            <div class="function-item-color" style="background-color: #9d4edd;"></div>
+          </li>
+        </ul>
+        <div class="sidebar-actions">
+          <button class="btn btn-outline" onclick="addNewFunction()">
+            <i class="fas fa-plus"></i>
+            Add Function
+          </button>
+          <button class="btn btn-outline" onclick="saveWorkspace()">
+            <i class="fas fa-save"></i>
+            Save Workspace
+          </button>
+        </div>
+      </aside>
+
+      <section class="calculator-container">
+        <div class="calculator-header">
+          <div class="calculator-title">
+            <i class="fas fa-chart-line"></i>
+            <span>Advanced Graphing Calculator</span>
+          </div>
+          <div class="calculator-actions">
+            <div class="tooltip">
+              <button class="btn btn-outline" onclick="resetCalculator()">
+                <i class="fas fa-sync-alt"></i>
+                Reset
+              </button>
+              <span class="tooltip-text">Clear all functions</span>
+            </div>
+            <div class="tooltip">
+              <button class="btn btn-outline" onclick="zoomIn()">
+                <i class="fas fa-search-plus"></i>
+                Zoom In
+              </button>
+              <span class="tooltip-text">Zoom in graph</span>
+            </div>
+            <div class="tooltip">
+              <button class="btn btn-outline" onclick="zoomOut()">
+                <i class="fas fa-search-minus"></i>
+                Zoom Out
+              </button>
+              <span class="tooltip-text">Zoom out graph</span>
+            </div>
+            <div class="tooltip">
+              <button class="btn btn-primary pulse" onclick="exportData()">
+                <i class="fas fa-file-export"></i>
+                Export
+              </button>
+              <span class="tooltip-text">Export as image</span>
+            </div>
+          </div>
+        </div>
+        <div id="calculator"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="copyright">
+        © 2025 SolverPro Enterprise. All rights reserved.
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Help Center</a>
+      </div>
+    </div>
+  </footer>
 
   <!-- Include Desmos API -->
   <script src="https://www.desmos.com/api/v1.10/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
@@ -67,15 +526,23 @@
       settingsMenu: true,
       zoomButtons: false,
       expressionsCollapsed: false,
+      border: false,
+      lockViewport: false,
+      invertedColors: false
     });
 
-    // Example: Add a default expression
-    calculator.setExpression({ id: 'parabola', latex: 'y=x^2', color: Desmos.Colors.BLUE });
+    // Set initial expressions
+    calculator.setExpression({ id: 'parabola', latex: 'y=x^2', color: '#3a86ff' });
 
     // Function to reset the calculator
     function resetCalculator() {
       calculator.setBlank();
-      calculator.setExpression({ id: 'parabola', latex: 'y=x^2', color: Desmos.Colors.BLUE });
+      calculator.setExpression({ id: 'parabola', latex: 'y=x^2', color: '#3a86ff' });
+      
+      // Update the active state in the function list
+      const functionItems = document.querySelectorAll('.function-item');
+      functionItems.forEach(item => item.classList.remove('active'));
+      functionItems[0].classList.add('active');
     }
 
     // Function to zoom in
@@ -101,6 +568,78 @@
       };
       calculator.setMathBounds(newBounds);
     }
+    
+    // Additional functions for the enhanced UI
+    function addNewFunction() {
+      const functionPrompt = prompt("Enter a function in the form y = f(x):", "y = ");
+      if (functionPrompt) {
+        try {
+          const latex = functionPrompt.replace('y = ', '').trim();
+          const colors = ['#ff006e', '#38b000', '#ffbe0b', '#9d4edd', '#3a86ff'];
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          const id = 'func_' + Date.now();
+          
+          calculator.setExpression({ id: id, latex: latex, color: randomColor });
+          
+          // Add to sidebar
+          const functionList = document.querySelector('.function-list');
+          const newItem = document.createElement('li');
+          newItem.className = 'function-item';
+          newItem.innerHTML = `
+            <span class="function-item-text">y = ${latex}</span>
+            <div class="function-item-color" style="background-color: ${randomColor};"></div>
+          `;
+          
+          newItem.addEventListener('click', function() {
+            const functionItems = document.querySelectorAll('.function-item');
+            functionItems.forEach(item => item.classList.remove('active'));
+            this.classList.add('active');
+          });
+          
+          functionList.appendChild(newItem);
+        } catch (e) {
+          alert("Invalid function format. Please try again.");
+        }
+      }
+    }
+    
+    function saveWorkspace() {
+      alert("Workspace saved successfully!");
+      // In a real application, this would connect to a backend to save the state
+    }
+    
+    function exportData() {
+      alert("Graph exported! In a production environment, this would download the current graph as an image.");
+      // In a real application, this would use the Desmos API to export the current graph
+    }
+    
+    // Add click events to function items
+    document.querySelectorAll('.function-item').forEach((item, index) => {
+      item.addEventListener('click', function() {
+        const functionItems = document.querySelectorAll('.function-item');
+        functionItems.forEach(item => item.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Update calculator focus based on clicked function
+        switch(index) {
+          case 0:
+            calculator.setExpression({ id: 'parabola', latex: 'y=x^2', color: '#3a86ff' });
+            break;
+          case 1:
+            calculator.setExpression({ id: 'sine', latex: 'y=\\sin(x)', color: '#ff006e' });
+            break;
+          case 2:
+            calculator.setExpression({ id: 'log', latex: 'y=\\log(x)', color: '#38b000' });
+            break;
+          case 3:
+            calculator.setExpression({ id: 'sqrt', latex: 'y=\\sqrt{x}', color: '#ffbe0b' });
+            break;
+          case 4:
+            calculator.setExpression({ id: 'abs', latex: 'y=|x|', color: '#9d4edd' });
+            break;
+        }
+      });
+    });
   </script>
 </body>
-</html> 
+</html>
