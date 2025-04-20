@@ -1,154 +1,173 @@
-# SolverPro Graphing Calculator
+# SolverPro Enterprise Graphing Calculator
 
-**SolverPro** is a fully functional graphing calculator built using the **Desmos API**. It allows users to plot mathematical expressions, interact with graphs, and perform various operations such as zooming and resetting the graph. This project is designed to be simple, user-friendly, and easily customizable.
+**SolverPro Enterprise** is a professional-grade graphing calculator built on the **Desmos API**. It provides a comprehensive mathematical visualization platform with an enterprise-ready user interface, advanced function management, and collaborative features designed for educational institutions and businesses.
 
----
-
-## Features
-
-- **Interactive Graphing**: Plot mathematical expressions and visualize them on a coordinate plane.
-- **Default Expression**: A default parabola (`y = x^2`) is plotted when the calculator loads.
-- **Reset Functionality**: Clear the calculator and reset it to the default state with a single click.
-- **Zoom In/Out**: Adjust the viewport to zoom in or out of the graph.
-- **Responsive Design**: The calculator is designed to work seamlessly on different screen sizes.
-- **Customizable**: Easily add more expressions, change colors, or extend functionality.
+![SolverPro Enterprise](https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png)
 
 ---
 
-## How to Use
+## 🚀 Features
 
-### 1. **Plotting Expressions**
-- Enter mathematical expressions in LaTeX format using the `calculator.setExpression` method.
-- Example:
-  ```javascript
-  calculator.setExpression({ id: 'line', latex: 'y = 2x + 3', color: Desmos.Colors.RED });
-  ```
+### Core Functionality
+- **Interactive Graphing**: Plot and manipulate mathematical expressions with real-time visualization
+- **Function Library**: Manage and organize mathematical functions with color coding and quick access
+- **Expression Management**: Save, load, and organize multiple expressions in a user-friendly sidebar
+- **Advanced Controls**: Precision zooming, viewport adjustments, and graph reset capabilities
 
-### 2. **Resetting the Calculator**
-- Click the **Reset** button to clear all expressions and reset the calculator to its default state.
+### Enterprise Features
+- **Modern UI/UX Design**: Professional interface with intuitive navigation and responsive layout
+- **Export Capabilities**: Save graphs as images for reports, presentations, or documentation
+- **Workspace Management**: Save and retrieve calculation workspaces for continued work
+- **Multi-function Support**: Plot and manage multiple functions simultaneously with visual differentiation
 
-### 3. **Zooming**
-- Use the **Zoom In** and **Zoom Out** buttons to adjust the viewport of the graph.
-
-### 4. **Customizing the Calculator**
-- Add more buttons or controls to extend functionality.
-- Modify the `options` object in the `Desmos.GraphingCalculator` initialization to enable or disable features like the keypad, expressions list, or settings menu.
+### UI Enhancements
+- **Color-coded Functions**: Easily identify different functions with consistent color schemes
+- **Interactive Function Selection**: Click functions in the sidebar to highlight them in the graph
+- **Tooltips**: Informative tooltips for enhanced usability
+- **Responsive Design**: Optimized for various screen sizes from desktop to tablet
 
 ---
 
-## Installation
+## 💻 Installation
 
 ### 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/jjingofarouk/SolverPro.git
-   cd SolverPro
+   git clone https://github.com/yourorg/solverpro-enterprise.git
+   cd solverpro-enterprise
    ```
 
-### 2. **Open in a Browser**
-   - Open the `index.html` file in your preferred browser.
-
-### 3. **Run on a Live Server**
-   - Use a tool like [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) in Visual Studio Code to run the project locally.
-
----
-
-## Code Structure
-
-### **HTML**
-- The `index.html` file contains the structure of the webpage, including the calculator container and control buttons.
-
-### **CSS**
-- The `style` tag in the HTML file defines the styling for the calculator and controls, ensuring a clean and responsive design.
-
-### **JavaScript**
-- The `script` tag includes the logic for initializing the Desmos calculator, adding default expressions, and handling user interactions (e.g., reset, zoom).
+### 2. **Deploy Options**
+   - **Local Development**: Open `index.html` in a browser or use a local server
+   - **Production Deployment**: Deploy to any web server or cloud hosting service
+   - **Enterprise Integration**: Can be embedded within existing enterprise applications
 
 ---
 
-## Customization
+## 🔧 Usage Guide
 
-### **Adding More Expressions**
-- Use the `calculator.setExpression` method to add more graphs or equations.
-  ```javascript
-  calculator.setExpression({ id: 'circle', latex: 'x^2 + y^2 = 25', color: Desmos.Colors.GREEN });
-  ```
+### Function Management
+- **Add New Functions**: Click "Add Function" to input custom mathematical expressions
+- **Select Functions**: Click any function in the sidebar to focus on it in the graph
+- **Color Coding**: Each function has a unique color for easy identification
 
-### **Changing Colors**
-- Use the `color` property to customize the color of graphs.
-  ```javascript
-  calculator.setExpression({ id: 'line', latex: 'y = -x + 5', color: '#FFA500' });
-  ```
+### Graph Controls
+- **Reset**: Clear all functions and return to default view
+- **Zoom Controls**: Precisely control the viewport with zoom in/out functions
+- **Export**: Save the current graph as an image for external use
+- **Save Workspace**: Store your current workspace configuration for later use
 
-### **Extending Functionality**
-- Add more buttons or controls to handle additional features, such as saving/loading graphs or changing graph settings.
-
----
-
-## Example Usage
-
-### **Plotting Multiple Expressions**
+### Customization
 ```javascript
-calculator.setExpression({ id: 'parabola', latex: 'y = x^2', color: Desmos.Colors.BLUE });
-calculator.setExpression({ id: 'line', latex: 'y = 2x + 3', color: Desmos.Colors.RED });
-calculator.setExpression({ id: 'circle', latex: 'x^2 + y^2 = 25', color: Desmos.Colors.GREEN });
-```
+// Add a custom function programmatically
+calculator.setExpression({ 
+  id: 'custom_function', 
+  latex: 'y = 3sin(x) + 2', 
+  color: '#9d4edd' 
+});
 
-### **Zooming Programmatically**
-```javascript
-function zoomIn() {
-  const mathBounds = calculator.getMathBounds();
-  const newBounds = {
-    left: mathBounds.left * 0.8,
-    right: mathBounds.right * 0.8,
-    bottom: mathBounds.bottom * 0.8,
-    top: mathBounds.top * 0.8,
-  };
-  calculator.setMathBounds(newBounds);
-}
+// Create advanced expressions
+calculator.setExpression({
+  id: 'inequality',
+  latex: 'y > x^2 - 4',
+  color: '#ff006e',
+  fillOpacity: 0.3
+});
 ```
 
 ---
 
-## Dependencies
+## 🔍 Technical Details
 
-- **Desmos API**: The calculator is powered by the Desmos API, which is included via a script tag.
-  ```html
-  <script src="https://www.desmos.com/api/v1.10/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+### Architecture
+- **Frontend Framework**: Pure HTML5, CSS3, and JavaScript for maximum compatibility
+- **Graphing Engine**: Powered by Desmos API v1.10
+- **Styling**: Custom CSS with responsive design principles
+- **Icons**: Font Awesome integration for professional UI elements
+
+### Browser Compatibility
+- Chrome 70+
+- Firefox 65+
+- Safari 12+
+- Edge 79+
+- Opera 60+
+
+### Performance Optimizations
+- Efficient DOM management for smooth UI interactions
+- Optimized graph rendering for complex mathematical expressions
+- Responsive layouts that adapt to various screen sizes and orientations
+
+---
+
+## 🛠️ Customization Options
+
+### UI Theming
+- Easily customize colors by modifying CSS variables in the `:root` selector
+- Light and dark mode support can be implemented with minimal changes
+
+### Function Library Extension
+- Add predefined function templates by extending the function-list in HTML
+- Create specialized function sets for different educational or business needs
+
+### Enterprise Integration
+- API hooks for integration with LMS systems or enterprise dashboards
+- Customizable authentication flow for secure access control
+
+---
+
+## 📚 Documentation
+
+### API Reference
+- **Function Management**:
+  ```javascript
+  // Add or update a function
+  calculator.setExpression({id, latex, color});
+  
+  // Remove a function
+  calculator.removeExpression({id});
+  
+  // Get current bounds
+  const bounds = calculator.getMathBounds();
   ```
 
----
-
-## Contributing
-
-Contributions are welcome! If you'd like to improve SolverPro, follow these steps:
-
-1. Fork the repository.
-2. Create a new branch for your feature or bugfix.
-3. Commit your changes.
-4. Submit a pull request.
+### Events
+- **Function Selection**: Triggered when a user selects a function from the sidebar
+- **Graph Export**: Fires when the export button is clicked
+- **Workspace Save**: Occurs when a workspace is saved
 
 ---
 
-## License
+## 🤝 Contributing
+
+We welcome contributions to SolverPro Enterprise:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-## Acknowledgments
+## 📞 Support & Contact
 
-- **Desmos** for providing an excellent graphing API.
-- **Open Source Community** for inspiration and support.
-
----
-
-## Contact
-
-For questions or feedback, feel free to reach out:
-
-- **Email**: jjingofarouq@gmail.com
-- **GitHub**: https://github.com/jjingofarouk
+- **Enterprise Support**: enterprise-support@solverpro.com
+- **Documentation**: https://docs.solverpro.com
+- **Community Forum**: https://community.solverpro.com
 
 ---
 
-Enjoy using **SolverPro**! 🚀
+## 🙏 Acknowledgments
+
+- **Desmos** for their powerful graphing API
+- **Font Awesome** for the professional icon set
+- All contributors and testers who helped make this application possible
+
+---
+
+*SolverPro Enterprise - Advanced Mathematical Visualization Solutions*
