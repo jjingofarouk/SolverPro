@@ -40,7 +40,7 @@
 
 ### 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/SolverPro.git
+   git clone https://github.com/jjingofarouk/SolverPro.git
    cd SolverPro
    ```
 
